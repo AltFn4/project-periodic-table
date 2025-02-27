@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# The query that connects to the postgresql database.
 PSQL="psql -U freecodecamp -d periodic_table -t -A -c"
 
 # Shows message if no arguments are given.
