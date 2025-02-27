@@ -2,15 +2,18 @@
 
 PSQL="psql -U freecodecamp -d periodic_table -t -A -c"
 
+# Shows message if no arguments are given.
 if (($# == 0)); then
   echo "Please provide an element as an argument."
 else
+  # Searches for the element by its atomic number if the input is an number.
   if [[ "$1" =~ ^[0-9]+$ ]]; then
     ELEMENT=$($PSQL "select atomic_number, symbol, name from elements where atomic_number='$1'")
   else
     ELEMENT=$($PSQL "select atomic_number, symbol, name from elements where name='$1' or symbol='$1' limit 1")
   fi
 
+  # Shows message if no element is found.
   if [ -z "$ELEMENT" ]; then
     echo "I could not find that element in the database."
   else
